@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"c:/Users/Vegar Eeg/workspace/nobs-fs\" && ls -la && echo \"--- panel.ts search ---\"; find . -name 'panel.ts' -not -path '*/node_modules/*' 2>/dev/null | head; echo \"--- grep VID/PID across app ---\"; grep -rniE \"0x0657|0x2341|Nobs Autopilot|Nobs Panel|productName|requestDevice|gamepad\" --include=*.ts --include=*.js -l . 2>/dev/null | grep -v node_modules | head)",
+      "Read(//c/Users/Vegar Eeg/workspace/nobs-fs/**)",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\(JSON.stringify\\(p.scripts,null,2\\)\\)\")",
+      "PowerShell(cd \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-app\"; npx tsc -b 2>&1 | Select-Object -First 30; \"EXIT $LASTEXITCODE\")",
+      "PowerShell(cd \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-app\"; npx tsc -b 2>&1 | Select-Object -First 20; npx biome check src/components/Panel/Panel.tsx 2>&1 | Select-Object -Last 5; \"EXIT $LASTEXITCODE\")",
+      "PowerShell($cli = Get-ChildItem -Path \"$env:LOCALAPPDATA\\\\Programs\",\"C:\\\\Program Files\",\"$env:LOCALAPPDATA\\\\Arduino15\" -Recurse -Filter arduino-cli.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName; if \\($cli\\) { \"FOUND: $cli\" } else { \"arduino-cli.exe not found\" })",
+      "PowerShell($cli = \"C:\\\\Users\\\\Vegar Eeg\\\\AppData\\\\Local\\\\Programs\\\\Arduino IDE\\\\resources\\\\app\\\\lib\\\\backend\\\\resources\\\\arduino-cli.exe\"; & $cli core list 2>$null | Select-String -Pattern esp32)",
+      "PowerShell($cli = \"C:\\\\Users\\\\Vegar Eeg\\\\AppData\\\\Local\\\\Programs\\\\Arduino IDE\\\\resources\\\\app\\\\lib\\\\backend\\\\resources\\\\arduino-cli.exe\"; & $cli compile -b arduino:esp32:nano_nora --output-dir \"$env:TEMP\\\\nobs_ap_out\" \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-autopilot\\\\firmware\\\\arduino_eps32_nano\" 2>$null | Select-Object -Last 20; \"EXIT $LASTEXITCODE\")",
+      "PowerShell($cli = \"C:\\\\Users\\\\Vegar Eeg\\\\AppData\\\\Local\\\\Programs\\\\Arduino IDE\\\\resources\\\\app\\\\lib\\\\backend\\\\resources\\\\arduino-cli.exe\"; $out = & $cli compile -b arduino:esp32:nano_nora --output-dir \"$env:TEMP\\\\nobs_ap_out\" \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-autopilot\\\\firmware\\\\arduino_eps32_nano\" 2>&1; $out | Select-String -Pattern \"error|Error\" | Select-Object -First 25)",
+      "Read(//c/Users/Vegar Eeg/AppData/Local/Arduino15/packages/arduino/hardware/esp32/2.0.18-arduino.5/variants/arduino_nano_nora/**)",
+      "Read(//c/Users/Vegar Eeg/AppData/Local/Arduino15/packages/arduino/hardware/esp32/2.0.18-arduino.5/libraries/USB/src/**)",
+      "Read(//c/Users/Vegar Eeg/AppData/Local/Arduino15/packages/arduino/hardware/esp32/2.0.18-arduino.5/**)",
+      "Bash(cat biome.json)",
+      "Bash(cat src/components/index.ts)",
+      "PowerShell(cd \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-app\"; npx tsc -b 2>&1 | Select-Object -First 40; \"TSC EXIT $LASTEXITCODE\")",
+      "PowerShell(cd \"c:\\\\Users\\\\Vegar Eeg\\\\workspace\\\\nobs-fs\\\\nobs-fs-app\"; npx biome check --write src 2>&1 | Select-Object -Last 25; \"BIOME EXIT $LASTEXITCODE\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\panel",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\components\\Panel",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-autopilot\\firmware\\arduino_eps32_nano",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-autopilot\\firmware\\arduino_micro",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\hooks",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\components\\DeviceCard",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\components",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src\\pages\\Home",
+      "c:\\Users\\Vegar Eeg\\workspace\\nobs-fs\\nobs-fs-app\\src"
+    ]
+  }
+}
