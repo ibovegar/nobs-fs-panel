@@ -22,7 +22,11 @@ A few friendly notes before you start buying:
 | **1.4** | 1 | Stripboard, 50 × 80 mm | [BusBoard Prototype Systems / ST1](https://no.mouser.com/ProductDetail/BusBoard-Prototype-Systems/ST1) | Controller board carrier for the Arduino, pin headers, and terminal blocks |
 | **1.5** | 2 | Female Pin Header Socket, 26-position, 2.54 mm pitch | [3M Electronic Solutions Division / 929850-01-26-RA](https://no.mouser.com/ProductDetail/3M-Electronic-Solutions-Division/929850-01-26-RA) | Sockets soldered to the stripboard to seat the Arduino Nano ESP32 |
 | **1.6** | 2 | Fixed Terminal Block, 6-position, 2.54 mm pitch | [GCT / TBC05-06-1-G-G](https://no.mouser.com/ProductDetail/GCT/TBC05-06-1-G-G) | Screw-down wiring for the switch signal and ground wires |
-| **1.7** | 1 | 3 mm Green LED, Diffused, 2.2 V | [Lumex / SSL-LX30FT4GD](https://no.mouser.com/ProductDetail/Lumex/SSL-LX30FT4GD) | Front-plate status indicator |
+| **1.7** | 1 | 3 mm Green LED, Diffused, 2.2 V | [Lumex / SSL-LX30FT4GD](https://no.mouser.com/ProductDetail/Lumex/SSL-LX30FT4GD?qs=7jmq9uQgtYG4HR2h%252BlgbMw%3D%3D) | Front-plate status indicator |
+| **1.8** | 1 | 120 Ω Resistor, 1/4 W, ±1%, Metal Film | [KOA Speer / MFS1/4DCT52R1200F](https://no.mouser.com/ProductDetail/KOA-Speer/MFS1-4DCT52R1200F?qs=ddCg%252BR5cWn20oJHZLuYO%2FQ%3D%3D) | Current-limiting resistor for the status LED |
+| **1.9** | 2 | Toggle Switch Cap, Bat Lever, Green | [NKK Switches / AT434F](https://no.mouser.com/ProductDetail/NKK-Switches/AT434F?qs=O05gvr8fLT3nXnSEPt0k3g%3D%3D) | Color-coded cap for toggle switches |
+| **1.10** | 2 | Toggle Switch Cap, Bat Lever, Red | [NKK Switches / AT434C](https://no.mouser.com/ProductDetail/NKK-Switches/AT434C?qs=O05gvr8fLT2riUxsIoEfkQ%3D%3D) | Color-coded cap for toggle switches |
+| **1.11** | 4 | Toggle Switch Cap, Bat Lever, White | [NKK Switches / AT434B](https://no.mouser.com/ProductDetail/NKK-Switches/AT434B?qs=O05gvr8fLT2J5h7R71L7Aw%3D%3D) | Color-coded cap for toggle switches |
 
 ## Structural & Enclosure Hardware
 

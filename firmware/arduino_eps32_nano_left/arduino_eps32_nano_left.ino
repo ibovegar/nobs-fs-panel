@@ -1,4 +1,12 @@
-// Nobs Panel — Arduino Nano ESP32 (ESP32-S3) USB HID gamepad firmware.
+// Nobs Panel (LEFT-mount variant) — Arduino Nano ESP32 (ESP32-S3) USB HID gamepad firmware.
+//
+// This is the left-hand-mount sibling of the standard (right-mount) sketch in
+// firmware/arduino_eps32_nano/. The two are identical except for the switch-to-pin map,
+// which is mirrored so the panel reads correctly when mounted on the *left* side of a
+// track-racer T-profile aluminium frame: the switch order is reversed (SW1/SW2 swap pin
+// groups with SW8/SW7, SW3 with SW6, SW4 with SW5) AND each switch's two terminals are
+// swapped, since the rotated mount also flips every switch's up/down. See
+// docs/arduino-esp-32-wiring-left.md for the full button + pin table.
 //
 // A switch-only sibling of the Nobs Autopilot build, ported to the ESP32-S3's
 // native USB. Exposes 16 buttons in the exact order the nobs-fs app expects:
@@ -6,7 +14,6 @@
 //                   (SW1 Pin1, SW1 Pin3, SW2 Pin1, SW2 Pin3, … SW8 Pin1, SW8 Pin3)
 // SW1..SW6 are ON-ON (2-position) and SW7..SW8 are ON-OFF-ON (3-position, the
 // center position grounds neither terminal so both buttons read released).
-// See docs/arduino-esp-32-wiring.md for the full button + pin table.
 //
 // Unlike the Autopilot there are no encoders, so this sketch has no quadrature
 // decoding, no acceleration, and no EEPROM acceleration store. Every input is a
@@ -22,9 +29,13 @@
 // ── USB identity: dynamic, stored in NVS (Preferences) ────────────────────────
 // The device enumerates with VID 0x303A (Espressif's vendor ID) and a PID + product
 // name that are *configurable at runtime*. Each Nobs box gets its own PID so MSFS
-// can't mirror/overwrite control bindings across panels. Out of the box the panel
-// defaults to PID 0x80F0 / "Nobs Panel" (matches the `panel` entry in the app's
-// device registry, src/panel/panel.ts).
+// can't mirror/overwrite control bindings across panels. The panel product owns the
+// PID block 0x80F0–0x80F3 (instance 1 = 0x80F0 "Nobs Panel", instance 2 = 0x80F1
+// "Nobs Panel 2", … see the `panel` entry in the app's device registry,
+// src/panel/panel.ts). Because a left panel is meant to share a rig with a standard
+// (right) panel, this variant defaults to the *2nd* panel instance, PID 0x80F1 /
+// "Nobs Panel 2", so the two never collide out of the box. (If this is your only
+// panel, you can move it onto 0x80F0 / "Nobs Panel" with the config app.)
 //
 // The PID and name live in flash via the native Preferences library (NVS). On boot
 // the firmware reads them *before* USB.begin() and applies them to the descriptor.
@@ -160,8 +171,8 @@ USBCDC USBSerial;
 // host-configurable. Defaults are the panel profile; an unconfigured chip uses them.
 // NB: named NOBS_USB_VID, not USB_VID — the core's pins_arduino.h #defines USB_VID.
 const uint16_t NOBS_USB_VID    = 0x303A;
-const uint16_t DEFAULT_PID     = 0x80F0;
-const char*    DEFAULT_NAME    = "Nobs Panel";
+const uint16_t DEFAULT_PID     = 0x80F1;        // 2nd panel instance (left mount)
+const char*    DEFAULT_NAME    = "Nobs Panel 2";
 const char*    NVS_NAMESPACE   = "nobs";
 const char*    NVS_KEY_PID     = "pid";
 const char*    NVS_KEY_NAME    = "name";
@@ -224,30 +235,38 @@ extern "C" const uint16_t* tud_descriptor_string_cb(uint8_t index, uint16_t lang
   return desc;
 }
 
-// ── Pin assignments (Arduino Nano ESP32 labels — see arduino-esp-32-wiring.md) ─
-// In HID button order: button i is driven by swPin[i]. Each switch contributes two
-// consecutive buttons (its Pin 1 and Pin 3 terminals); the center terminal is GND.
+// ── Pin assignments (Arduino Nano ESP32 labels — see arduino-esp-32-wiring-left.md) ─
+// LEFT-mount variant. In HID button order: button i is driven by swPin[i]. Each switch
+// contributes two consecutive buttons; the center terminal is GND. The panel is mirrored
+// for a left mount, which changes the standard (right-mount) map in two ways:
+//   (1) the switch ORDER is reversed — SW1/SW2 swap pin groups with SW8/SW7, and the
+//       middle four mirror too (SW3 with SW6, SW4 with SW5);
+//   (2) each switch sits rotated, so its two positions are flipped — the firmware lists
+//       each switch's Pin 3 terminal first (Position 1) and Pin 1 second (Position 2),
+//       which undoes the up/down inversion (flipping a switch up reads as up).
+// The app maps every HID button to a fixed switch label, so this is what makes the panel
+// read the right way around (e.g. flipping SW3 up shows up as SW3, up).
 //
 //   index  HID button  switch / terminal   pin
-//   0      Button 1     SW1 Pin 1           A0
-//   1      Button 2     SW1 Pin 3           A1
-//   2      Button 3     SW2 Pin 1           A2
-//   3      Button 4     SW2 Pin 3           A3
-//   4      Button 5     SW3 Pin 1           A4
-//   5      Button 6     SW3 Pin 3           A5
-//   6      Button 7     SW4 Pin 1           A6
-//   7      Button 8     SW4 Pin 3           A7
-//   8      Button 9     SW5 Pin 1           D12
-//   9      Button 10    SW5 Pin 3           D11
-//   10     Button 11    SW6 Pin 1           D10
-//   11     Button 12    SW6 Pin 3           D9
-//   12     Button 13    SW7 Pin 1           D8
-//   13     Button 14    SW7 Pin 3           D7
-//   14     Button 15    SW8 Pin 1           D6
-//   15     Button 16    SW8 Pin 3           D5
+//   0      Button 1     SW1 Pin 3           D7
+//   1      Button 2     SW1 Pin 1           D8
+//   2      Button 3     SW2 Pin 3           D5
+//   3      Button 4     SW2 Pin 1           D6
+//   4      Button 5     SW3 Pin 3           D9
+//   5      Button 6     SW3 Pin 1           D10
+//   6      Button 7     SW4 Pin 3           D11
+//   7      Button 8     SW4 Pin 1           D12
+//   8      Button 9     SW5 Pin 3           A7
+//   9      Button 10    SW5 Pin 1           A6
+//   10     Button 11    SW6 Pin 3           A5
+//   11     Button 12    SW6 Pin 1           A4
+//   12     Button 13    SW7 Pin 3           A3
+//   13     Button 14    SW7 Pin 1           A2
+//   14     Button 15    SW8 Pin 3           A1
+//   15     Button 16    SW8 Pin 1           A0
 const uint8_t swPin[16] = {
-  A0,  A1,  A2,  A3,  A4,  A5,  A6,  A7,
-  D12, D11, D10, D9,  D8,  D7,  D6,  D5,
+  D7,  D8,  D5,  D6,  D9,  D10, D11, D12,
+  A7,  A6,  A5,  A4,  A3,  A2,  A1,  A0,
 };
 
 // NOTE: every pin above is driven with INPUT_PULLUP, so the closed-to-GND wiring

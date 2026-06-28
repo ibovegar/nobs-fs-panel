@@ -28,9 +28,35 @@ there's nothing to install and nothing that can fall out of sync with a sim upda
   reference alongside it, see the [wiring diagram](docs/wiring_diagram.pdf).
 - **[Loading the firmware](firmware/arduino_eps32_nano/README.md)**: first-time flashing and
   re-flashing, step by step.
+- **[Left-mount variant](firmware/arduino_eps32_nano_left/README.md)**: a version wired for mounting
+  on the **left** side of a frame, with its own [wiring map](docs/arduino-esp-32-wiring-left.md). See
+  [Mounting orientation](#mounting-orientation-left-or-right) below.
 - **[Setting the device ID & name](docs/board-identity.md)**: how the board names itself, how to
   rename it, and how to run several panels at once (each gets its own ID + name).
 - **[Bill of materials](docs/bill-of-materials.md)**: parts list.
+
+## Mounting orientation (left or right)
+
+The panel comes in two wiring variants so it reads correctly whichever side of a track-racer
+T-profile aluminium frame you mount it on:
+
+- **Right mount (standard):** firmware in [`firmware/arduino_eps32_nano/`](firmware/arduino_eps32_nano/),
+  wiring in [arduino-esp-32-wiring.md](docs/arduino-esp-32-wiring.md).
+- **Left mount:** firmware in [`firmware/arduino_eps32_nano_left/`](firmware/arduino_eps32_nano_left/),
+  wiring in [arduino-esp-32-wiring-left.md](docs/arduino-esp-32-wiring-left.md).
+
+The two are identical apart from the switch-to-pin map, which the left variant mirrors for a left
+mount: the switch order is reversed (SW1/SW2 swap pin groups with SW8/SW7, and the middle four
+mirror too: SW3 with SW6, SW4 with SW5), and each switch's two terminals are swapped so its up/down
+isn't inverted by the rotated mount. Both present the same 16 buttons. Pick the firmware and wiring
+map that match how you mounted the panel, and don't mix one variant's firmware with the other's
+wiring.
+
+Because a left and a right panel can sit in the same rig, they ship with **different default USB
+IDs** from the panel's ID block so the simulator never mixes up their bindings: the right (standard)
+variant is the 1st panel instance (`80F0` / "Nobs Panel"), the left variant is the 2nd
+(`80F1` / "Nobs Panel 2"). See [Setting the device ID & name](#setting-the-device-id--name-in-brief)
+and [docs/board-identity.md](docs/board-identity.md) for the full scheme.
 
 ## Nobs FS Companion App
 

@@ -51,6 +51,12 @@ extra one, give it the next ID and a numbered name with the rename step below, e
 on that product to start tracking the extra module. The simulator then sees "Nobs Panel" and "Nobs
 Panel 2" as two separate controllers with independent bindings.
 
+> **Left-mount panels:** the [left-mount firmware variant](../firmware/arduino_eps32_nano_left/README.md)
+> is built to share a rig with a standard (right) panel, so it already ships on the **2nd** panel
+> instance (`80F1` / "Nobs Panel 2") rather than `80F0`. A left + right pair therefore works out of
+> the box with no renaming. If a left panel is your only panel, you can move it onto `80F0` /
+> "Nobs Panel" with the rename step below.
+
 ## How to rename a board
 
 The configuration app does this for you. Behind the scenes it just sends the board one short line

@@ -6,6 +6,10 @@ parts list, and device identity, see the [main README](../README.md).
 
 > For the pin map, see [arduino-esp-32-wiring.md](arduino-esp-32-wiring.md). For a visual
 > reference alongside it, see the [wiring diagram](wiring_diagram.pdf).
+>
+> Mounting on the **left** side of a frame instead? Use the left-mount wiring map
+> ([arduino-esp-32-wiring-left.md](arduino-esp-32-wiring-left.md)) and the matching left firmware
+> throughout these steps. See [Mounting orientation](../README.md#mounting-orientation-left-or-right).
 
 ## Assembly Instructions
 
@@ -161,7 +165,8 @@ That's a complete, assembled Nobs Panel, ready for the verification steps below.
 1. **Check for shorts first (before plugging in USB):** use a multimeter to make sure none of your
    ground wires are accidentally touching a signal wire. This catches wiring mistakes before they
    reach your PC.
-2. **Load the firmware:** follow the [Arduino Nano ESP32 firmware guide](../firmware/arduino_eps32_nano/README.md).
+2. **Load the firmware:** follow the [Arduino Nano ESP32 firmware guide](../firmware/arduino_eps32_nano/README.md)
+   (for a left mount, use the [left-mount firmware guide](../firmware/arduino_eps32_nano_left/README.md) instead).
 3. **Confirm the name:** once plugged in, the panel should show up as `Nobs Panel (Vendor: 303a
    Product: 80f0)`. If it shows a generic name instead, open Windows **Device Manager**, turn on
    **View → Show hidden devices**, uninstall any old listings for the board, and replug it.

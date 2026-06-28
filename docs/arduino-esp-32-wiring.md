@@ -2,6 +2,11 @@
 
 This table tells you which pin on the board each wire connects to, for the **Arduino Nano ESP32**.
 
+> This is the **standard (right-mount)** wiring, paired with the firmware in
+> [`firmware/arduino_eps32_nano/`](../firmware/arduino_eps32_nano/). If you are building the panel
+> for a **left** mount, use [arduino-esp-32-wiring-left.md](arduino-esp-32-wiring-left.md) and its
+> left firmware instead.
+
 This button box has **8 toggle switches**: SW1–SW6 are **ON-ON** (2-position) and SW7–SW8 are
 **ON-OFF-ON** (3-position, with the center position doing nothing). Every switch has three
 terminals: the two outer terminals (pin 1 and pin 3) each go to a signal pin, and the center
@@ -37,3 +42,9 @@ you flip that switch into that position. You don't wire anything for it.
 | **SW8** (ON-OFF-ON) | Switch 8 | Pin 1 Terminal | **D6** | Button 15 | Position 1 |
 | | Switch 8 | Pin 3 Terminal | **D5** | Button 16 | Position 2 |
 | **Ground Loop** | All Switches | Pin 2 / Center Terminals | **GND** | *None* | System Ground |
+| **Status LED** | Status LED | Anode, via 120 Ω resistor | **D4** | *None* | Boot/Connect Status |
+| | Status LED | Cathode | **GND** | *None* | Boot/Connect Status |
+
+> 💡 **Status LED:** wired with a 120 Ω current-limiting resistor from **D4** to **GND**. It blinks
+> while the board is booting/waiting for USB enumeration, and lights steady once the host PC has
+> enumerated it.
