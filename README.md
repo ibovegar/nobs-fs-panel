@@ -8,6 +8,8 @@ install.
 SW1–SW6 are 2-position (ON-ON) and SW7–SW8 are 3-position (ON-OFF-ON); each switch's two outer
 terminals are reported as two buttons, for **16 buttons** total.
 
+![Nobs Panel](images/nobs_panel.png)
+
 ## Design Philosophy
 
 **This panel is built for tactile, no-fuss control**: real mechanical toggles instead of a
@@ -19,13 +21,11 @@ there's nothing to install and nothing that can fall out of sync with a sim upda
 * **Driver-Free by Design:** The board presents itself as a standard HID gamepad, so MSFS and the
   Nobs app recognise it the moment it's plugged in.
 
-![Nobs Panel](images/nobs_panel_front.png)
-
 ## Docs
 
 - **[Build instructions](docs/build-instructions.md)**: step-by-step assembly, photos included.
 - **[Which wire goes where](docs/arduino-esp-32-wiring.md)**: the button + pin map. For a visual
-  reference alongside it, see the [wiring diagram](docs/wiring_diagram.pdf).
+  reference alongside it, see the [wiring diagram](docs/wiring-diagram.pdf).
 - **[Loading the firmware](firmware/arduino_eps32_nano/README.md)**: first-time flashing and
   re-flashing, step by step.
 - **[Left-mount variant](firmware/arduino_eps32_nano_left/README.md)**: a version wired for mounting
