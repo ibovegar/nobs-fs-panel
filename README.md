@@ -37,6 +37,13 @@ there's nothing to install and nothing that can fall out of sync with a sim upda
 
 ## Mounting orientation (left or right)
 
+The Nobs panels are designed to mount to a 40x80 T-slot aluminium extrusion rig (e.g. a Track
+Racer TR160), around the central profile assembly that holds the flight yoke or steering wheel:
+**Nobs Panel** mounts to the left of the assembly, **Nobs Approach** to the right, and **Nobs
+Autopilot** on top.
+
+![Rig assembly](images/rig-assembly.PNG)
+
 The panel comes in two wiring variants so it reads correctly whichever side of a track-racer
 T-profile aluminium frame you mount it on:
 
