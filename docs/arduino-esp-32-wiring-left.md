@@ -58,4 +58,4 @@ you flip that switch into that position. You don't wire anything for it.
 
 > 💡 **Status LED:** wired with a 120 Ω current-limiting resistor from **D4** to **GND**. It blinks
 > while the board is booting/waiting for USB enumeration, and lights steady once the host PC has
-> enumerated it. (Same as the standard mount — the LED isn't affected by the left-mount pin swap.)
+> enumerated it. If no host shows up within 10 seconds it stops blinking and stays off. (Same as the standard mount — the LED isn't affected by the left-mount pin swap.)
